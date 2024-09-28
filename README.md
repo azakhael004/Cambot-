@@ -1,4 +1,4 @@
-# Cambot
+# CamBot
 CamBot is a 7 Dof robot with a depth camera and a multicamera system attached to its tool flange.
 This repository contains the files needed to simulate it in a ros2 environment
 
