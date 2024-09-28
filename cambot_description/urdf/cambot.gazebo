@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<robot name="cambot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<gazebo>
+  <plugin name="control" filename="libgazebo_ros_control.so"/>
+</gazebo>
+<gazebo reference="base_link">
+  <material>Gazebo/Orange</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="shoulder_1">
+  <material>Gazebo/Black</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="elbow_1">
+  <material>Gazebo/Orange</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="proximal_wrist_1">
+  <material>Gazebo/Black</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="intermediate_wrist_1">
+  <material>Gazebo/Orange</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="distal_wrist_1">
+   <material>Gazebo/Black</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="distal_section_1">
+  <material>Gazebo/Orange</material> 
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="tool_flange_1">
+  <material>Gazebo/Green</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="camera_1">
+  <material>Gazebo/Black</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+  <gazebo reference="camera_1">
+    <material>Gazebo/Black</material>
+    <self_collide>true</self_collide>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <sensor name="camera" type="depth">
+      <pose> 0 0 0 0 0 0 </pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <camera>
+        <horizontal_fov>1.089</horizontal_fov>
+        <image>
+          <format>B8G8R8</format>
+          <width>1280</width>
+          <height>640</height>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>8.0</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" 
+              filename="libgazebo_ros_camera.so">
+        <frame_name>camera_link_optical</frame_name>
+        <min_depth>0.1</min_depth>
+        <max_depth>100.0</max_depth>
+      </plugin>
+    </sensor>
+  </gazebo>
+  
+
+<gazebo reference="left_strcamera_1">
+  <material>Gazebo/Red</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="right_strcamera_1">
+  <material>Gazebo/Red</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+  <gazebo reference="left_strcamera_1">
+    <sensor type="multicamera" name="stereo_camera">
+      <update_rate>30.0</update_rate>
+      <camera name="left">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <camera name="right">
+        <pose>0 -0.07 0 0 0 0</pose>
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="stereo_camera_controller" filename="libgazebo_ros_multicamera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>multisense_sl/camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>left_camera_optical_frame</frameName>
+        <!--<rightFrameName>right_camera_optical_frame</rightFrameName>-->
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>
